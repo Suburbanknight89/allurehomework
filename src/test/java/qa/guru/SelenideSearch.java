@@ -15,10 +15,7 @@ public class SelenideSearch {
     public void testRepositoryIssue(){
         open("https://github.com");
 
-        $(".header-search-input").click();
-        $(".header-search-input").sendKeys("eroshenkoam/allure-example");
-        $(".header-search-input").submit();
-
+        $(".header-search-input").val("eroshenkoam/allure-example").submit();
         $(linkText("eroshenkoam/allure-example")).click();
         $(partialLinkText("Issues")).click();
         $(withText("#68")).should(exist);

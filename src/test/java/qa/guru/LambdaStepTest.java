@@ -3,6 +3,7 @@ package qa.guru;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -22,9 +23,7 @@ public class LambdaStepTest {
         });
 
         step("Ищем репозиторий " + REPOSITORY, ()->{
-            $(".header-search-input").click();
-            $(".header-search-input").sendKeys(REPOSITORY);
-            $(".header-search-input").submit();
+            $(".header-search-input").val("eroshenkoam/allure-example").submit();
         });
 
         step("Переходим в раздел Issues", ()-> {
@@ -33,7 +32,7 @@ public class LambdaStepTest {
 
         step("Проверяем, что существует Issue с номером "+ ISSUE_NUMBER, ()->{
             $(partialLinkText("Issues")).click();
-            $(withText("#"+ISSUE_NUMBER)).should(exist);
+            $(withText("#"+ISSUE_NUMBER)).shouldBe(visible);
         });
 
     }

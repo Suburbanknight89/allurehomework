@@ -3,6 +3,7 @@ package qa.guru;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -17,9 +18,7 @@ public class WebSteps {
 
     @Step("Ищем репозиторий {repository}")
     public void searchForRepository(String repository){
-        $(".header-search-input").click();
-        $(".header-search-input").sendKeys(repository);
-        $(".header-search-input").submit();
+        $(".header-search-input").val("eroshenkoam/allure-example").submit();
     }
 
     @Step("Переходим в репозиторий {repository}")
@@ -34,6 +33,6 @@ public class WebSteps {
 
     @Step("Проверяем, что существует Issue с номером {number}")
     public void shouldSeeIssueWithNumber(int number){
-        $(withText("#"+number)).should(exist);
+        $(withText("#"+number)).shouldBe(visible);
     }
 }
